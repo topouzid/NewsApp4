@@ -3,6 +3,7 @@ package com.example.android.newsapp4;
 import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +47,14 @@ public class NewsAdapter extends ArrayAdapter<News> {
         titleTextView.setText(titlePart1);
         authorTextView.setText(titlePart2);
 
+        /** Find the Author name if there is one, find TextView in list_item.xml with ID author_name and set name to this view */
+        String authorName = currentNewsArticle.getAuthorName();
+        if (authorName.equals(null) || authorName.equals("")) {
+            Log.v("NewsAdapter", "No Author Name under TAGS");
+        } else {
+            Log.v("NewsAdapter", "Author Name: \"" + authorName + "\"");
+            authorTextView.setText(authorName);
+        }
         /** Find the TextView in the list_item.xml layout with the ID section_name and set object section to this view */
         TextView sectionTextView = (TextView) listItemView.findViewById(R.id.section_name);
         sectionTextView.setText(currentNewsArticle.getSectionName());

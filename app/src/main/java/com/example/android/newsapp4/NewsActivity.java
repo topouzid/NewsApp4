@@ -23,7 +23,7 @@ public class NewsActivity extends AppCompatActivity implements LoaderManager.Loa
     public static final String LOG_TAG = NewsActivity.class.getName();
 
     /** URL for news data from the Guardian dataset */
-    private static final String ONLINE_JSON_URL = "https://content.guardianapis.com/search?q=technology%20AND%20games&page-size=20&from-date=2018-01-01&api-key=10ae015c-6c0c-4023-b776-71b81c829b45";
+    private static final String ONLINE_JSON_URL = "https://content.guardianapis.com/search?q=technology%20AND%20android&show-tags=contributor&page-size=20&from-date=2018-01-01&api-key=10ae015c-6c0c-4023-b776-71b81c829b45";
     /**
      * Constant value for the news loader ID. We can choose any integer.
      * This really only comes into play if you're using multiple loaders.

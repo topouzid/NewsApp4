@@ -35,7 +35,29 @@ public class News {
     private String mUrl;
 
     /**
+     * Article Author name
+     */
+    private String mAuthor;
+
+    /**
      * Constructor that has exactly the same name as its class
+     *
+     * @param newsTitle       The news title, may contain an author name after a |
+     * @param newsAuthor      Author name
+     * @param newsSectionName Section name or names
+     * @param newsTimestamp   Time the article was posted in format: 2018-05-27T08:00:20Z
+     * @param newsUrl         News Url
+     */
+    public News(String newsTitle, String newsAuthor, String newsSectionName, String newsTimestamp, String newsUrl) {
+        mTitle = newsTitle;
+        mAuthor = newsAuthor;
+        mSectionName = newsSectionName;
+        mTime = newsTimestamp;
+        mUrl = newsUrl;
+    }
+
+    /**
+     * Constructor that has exactly the same name as its class, NO AUTHOR NAME
      *
      * @param newsTitle       The news title, may contain an author name after a |
      * @param newsSectionName Section name or names
@@ -50,7 +72,7 @@ public class News {
     }
 
     /**
-     * Constructor that has exactly the same name as its class, NO TIMESTAMP
+     * Constructor that has exactly the same name as its class, NO TIMESTAMP, NO AUTHOR NAME
      *
      * @param newsTitle       The news title, may contain an author name after a |
      * @param newsSectionName Section name or names
@@ -113,6 +135,15 @@ public class News {
      */
     public String getSectionName() {
         return mSectionName;
+    }
+
+    /**
+     * Method: get Author name
+     *
+     * @return String with author name
+     */
+    public String getAuthorName() {
+        return mAuthor;
     }
 
     /**

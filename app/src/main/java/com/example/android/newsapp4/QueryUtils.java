@@ -84,7 +84,7 @@ public final class QueryUtils {
                         reader.beginArray();
                         while (reader.hasNext()) {
                             Log.v("QueryUtils RF", "[else] reader.nextName: \"" + name + "\". Reading data...");
-                            /** add news object under "results" */
+                            /** add news object which is under "results" */
                             newsArticles.add(readNews(reader));
                         }
                         reader.endArray();
@@ -109,6 +109,7 @@ public final class QueryUtils {
         String webPublicationDate = null;
         String webTitle = null;
         String webUrl = null;
+        String authorWebTitle = null;
 
         Log.v("QueryUtils RE", "You are inside readNews method");
 
@@ -131,6 +132,24 @@ public final class QueryUtils {
                 /** store string value of key webUrl to variable webUrl */
                 webUrl = reader.nextString();
                 Log.v("QueryUtils RE", "News article URL: " + webUrl);
+            } else if (name.equals("tags")) {
+                /** get in tags array, get webTitle for Author name */
+                Log.v("QU readNews", "You are inside tags");
+                reader.beginArray();
+                while (reader.hasNext()) {
+                    reader.beginObject();
+                    while (reader.hasNext()) {
+                        name = reader.nextName();
+                        if (name.equals("webTitle")) {
+                            authorWebTitle = reader.nextString();
+                            Log.v("QueryUtils RE", "News Section TAGS, Name: " + authorWebTitle);
+                        } else {
+                            reader.skipValue();
+                        }
+                    }
+                    reader.endObject();
+                }
+                reader.endArray();
             } else {
                 /** don't do anything with values of other keys */
                 reader.skipValue();
@@ -138,7 +157,7 @@ public final class QueryUtils {
         }
         reader.endObject();
         /** Create new News object and return it */
-        return new News(webTitle, sectionName, webPublicationDate, webUrl);
+        return new News(webTitle, authorWebTitle, sectionName, webPublicationDate, webUrl);
     }
 
     /**
@@ -178,7 +197,6 @@ public final class QueryUtils {
             if (urlConnection.getResponseCode() == 200) {
                 Log.v("makeHttpRequest", "Response code 200 (OK)");
                 inputStream = urlConnection.getInputStream();
-//                extractEarthquakesFromInputStream(inputStream);
                 jsonResponse = readNewsFromStream(inputStream);
             } else {
                 Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
