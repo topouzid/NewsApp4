@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Technology News</string>
+    <string name="info_communicating">Communicating with journalists all over the world&#8230;</string>
+    <string name="info_no_network">No network connection</string>
+    <string name="info_no_recent_news">No recent tech related news found</string>
+    <string name="info_downloading">Getting news from the journalists&#8230;</string>
+</resources>

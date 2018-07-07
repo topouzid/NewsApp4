@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/activity_horizontal_margin">
+    <TextView
+        android:id="@+id/news_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/list_item_title_text"
+        android:fontFamily="sans-serif-light"
+        tools:text="This is the news title for this news. This is the news title."/>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/section_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="section name"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="@dimen/list_small_text"/>
+        <TextView
+            android:id="@+id/time_stamp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            tools:text="timestamp"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="@dimen/list_small_text"/>
+        <TextView
+            android:id="@+id/author_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="author name"
+            android:paddingEnd="5dp"
+            android:layout_toStartOf="@id/time_stamp"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="@dimen/list_small_text"/>
+    </RelativeLayout>
+
+</LinearLayout>

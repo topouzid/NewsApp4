@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NewsActivity">
+
+    <!-- Progress bar is for loading purposes -->
+    <ProgressBar
+        android:id="@+id/loading_progress"
+        android:layout_width="@dimen/loading_icon"
+        android:layout_height="@dimen/loading_icon"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        style="@style/Widget.AppCompat.ProgressBar"/>
+    <!-- Info about connection, progress and errors -->
+    <TextView
+        android:id="@+id/empty_view"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:text="Communicating with the journalists..."
+        android:textSize="@dimen/text_info"
+        android:gravity="center"
+        android:layout_centerInParent="true" />
+    <!-- Layout for a list of tech news -->
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@null"
+        android:dividerHeight="0dp" />
+
+</RelativeLayout>
