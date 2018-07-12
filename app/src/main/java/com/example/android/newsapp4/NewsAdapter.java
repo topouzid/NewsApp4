@@ -49,7 +49,7 @@ public class NewsAdapter extends ArrayAdapter<News> {
 
         /** Find the Author name if there is one, find TextView in list_item.xml with ID author_name and set name to this view */
         String authorName = currentNewsArticle.getAuthorName();
-        if (authorName.equals(null) || authorName.equals("")) {
+        if (authorName == null || authorName.equals("")) {
             Log.v("NewsAdapter", "No Author Name under TAGS");
         } else {
             Log.v("NewsAdapter", "Author Name: \"" + authorName + "\"");
