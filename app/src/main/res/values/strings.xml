@@ -29,4 +29,8 @@
     <!-- Label for Science topic option [CHAR LIMIT=20] -->
     <string name="settings_topic_science_label">Science</string>
     <string name="settings_topic_science_value" translatable="false">science</string>
+    <!-- Connection messages -->
+    <string name="communicating">Communicating with the journalists. Please wait&#8230;</string>
+    <string name="no_news_found">No recent technology news found</string>
+    <string name="no_network">No network connection</string>
 </resources>

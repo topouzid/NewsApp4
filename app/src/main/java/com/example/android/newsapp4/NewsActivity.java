@@ -41,7 +41,6 @@ public class NewsActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public Loader<ArrayList<News>> onCreateLoader(int id, Bundle args) {
         // Create a new loader for the given URL
-        Log.v("onCreateLoader", "Create new loader for " + ONLINE_JSON_URL);
 
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         // getString retrieves a String value from the preferences. The second parameter is the default value for this preference.
@@ -59,16 +58,15 @@ public class NewsActivity extends AppCompatActivity implements LoaderManager.Loa
         // buildUpon prepares the baseUri that we just parsed so we can add query parameters to it
         Uri.Builder uriBuilder = baseUri.buildUpon();
 
-        // Append query parameter and its value. For example, the `format=geojson`
+        // Append query parameter and its value. For example, the `page-size=20`
         uriBuilder.appendQueryParameter("q", "technology AND " + topicChoice);
         uriBuilder.appendQueryParameter("order-by", orderBy);
         uriBuilder.appendQueryParameter("show-tags", "contributor");
         uriBuilder.appendQueryParameter("page-size", "20");
         uriBuilder.appendQueryParameter("from-date", "2018-01-01");
         uriBuilder.appendQueryParameter("api-key", GUARDIAN_KEY);
-        Log.v("onCreateLoader", "URI BUILDER URL: " + uriBuilder.toString());
         mProgressBar.setVisibility(View.VISIBLE);
-        mEmptyTextView.setText("Communicating with the journalists. Please wait...");
+        mEmptyTextView.setText(getResources().getText(R.string.communicating));//"Communicating with the journalists. Please wait..."
         return new NewsLoader(this, uriBuilder.toString());
     }
 
@@ -81,14 +79,12 @@ public class NewsActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public void onLoadFinished(Loader<ArrayList<News>> loader, ArrayList<News> newsArticles) {
         if (newsArticles == null) {
-            Log.v("onLoadFinished", "No news articles on array, exit without doing anything");
-            mEmptyTextView.setText("Communicating with the journalists. Please wait...");
+            mEmptyTextView.setText(getResources().getText(R.string.communicating));//"Communicating with the journalists. Please wait..."
             return;
         }
-        Log.v("onLoadFinished", "Cleaning UI, showing new articles to UI");
         mProgressBar.setVisibility(View.GONE);
         cleanUi();
-        mEmptyTextView.setText("No recent technology news found");
+        mEmptyTextView.setText(getResources().getText(R.string.no_news_found));//"No recent technology news found");
         updateUi(newsArticles);
     }
 
@@ -96,8 +92,6 @@ public class NewsActivity extends AppCompatActivity implements LoaderManager.Loa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news);
-
-        Log.v("EQ Activity", "onCreate: STARTED");
 
         mEmptyTextView = (TextView) findViewById(R.id.empty_view);
         mProgressBar = (ProgressBar) findViewById(R.id.loading_progress);
@@ -114,12 +108,11 @@ public class NewsActivity extends AppCompatActivity implements LoaderManager.Loa
             // the bundle. Pass in this activity for the LoaderCallbacks parameter (which is valid
             // because this activity implements the LoaderCallbacks interface).
             loaderManager.initLoader(NEWS_LOADER_ID, null, this);
-            Log.v("initLoader", "Initializing loader...");
         } else {
             // Otherwise, display error
             // First, hide loading indicator so error message will be visible
             mProgressBar.setVisibility(View.GONE);
-            mEmptyTextView.setText("No network connection");
+            mEmptyTextView.setText(getResources().getText(R.string.no_network));//"No network connection");
         }
     }
 
@@ -136,7 +129,6 @@ public class NewsActivity extends AppCompatActivity implements LoaderManager.Loa
         // Create a new custom {@link NewsAdapter} of news articles
         NewsAdapter adapter = new NewsAdapter(this, newsArticles);
         int eqCount = newsArticles.size();
-        Log.v("updateUi", "ARTICLES COUNT: " + eqCount);
         // Find a reference to the {@link ListView} in the layout
         ListView newsListView = (ListView) findViewById(R.id.list);
         // Set the adapter on the {@link ListView}
@@ -151,7 +143,6 @@ public class NewsActivity extends AppCompatActivity implements LoaderManager.Loa
                         News currentArticle = newsArticles.get(position);
                         /** get the url from the current article */
                         String url = currentArticle.getUrl();
-                        Log.v("NewsActivity", "URL: " + url);
                         /** create a browser intent */
                         Intent browserIntent = new Intent(Intent.ACTION_VIEW);
                         /** set the URL and send it to the browser */
